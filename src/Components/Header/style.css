@@ -1,0 +1,8 @@
+.header-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.header-title > span {
+  color: #00b2ff;
+}
