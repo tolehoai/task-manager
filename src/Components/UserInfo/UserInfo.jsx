@@ -1,6 +1,7 @@
 import Logout from "@mui/icons-material/Logout";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
+import { Box } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -34,9 +35,18 @@ function UserInfo(props) {
         />
         <div className={classes.userInfo}>
           <div className={classes.userName}>Tô Lê Hoài</div>
-          <div className={classes.major}>
+          <Box
+            className={classes.major}
+            component="div"
+            sx={{
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+              maxWidth: "250px",
+            }}
+          >
             Mạng máy tính và truyền thông dữ liệu
-          </div>
+          </Box>
         </div>
       </div>
 

@@ -20,7 +20,7 @@ function Header(props) {
       <div className={classes.headerWraper}>
         <div className={classes.leftHeader}>
           <div className="header-title">
-            Task <span>Magager</span>
+            Task <span>Manager</span>
           </div>
         </div>
         <div className={classes.rightHeader}>

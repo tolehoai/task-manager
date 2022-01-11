@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Header from "./Components/Header/Header";
+import HomePage from "./Components/HomePage/HomePage";
 import { red } from "@mui/material/colors";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
@@ -17,6 +18,7 @@ function App() {
       <ThemeProvider theme={theme}>
         {" "}
         <Header />
+        <HomePage />
       </ThemeProvider>
     </div>
   );
