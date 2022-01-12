@@ -38,7 +38,7 @@ const myEventsList = [
     start: new Date(2022, 0, 7),
     end: new Date(2022, 0, 15),
     title: "Kỹ thuật phát hiện tấn công mạng",
-    color: "#ff6d00",
+    color: "#e32961",
   },
   {
     id: 3,
@@ -96,7 +96,9 @@ function Schedule(props) {
           events={myEventsList}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: height }}
+          style={{ height: myEventsList.length * 280 }}
+          step={55} // duration of the slot
+          timeslots={10} // number of slots within an hour
           onSelectEvent={(event) => {
             handleSelectEvent(event);
           }}
