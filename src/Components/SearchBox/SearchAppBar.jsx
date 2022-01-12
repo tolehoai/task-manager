@@ -64,7 +64,7 @@ export default function SearchAppBar() {
           inputProps={{ "aria-label": "search" }}
         />
         <Button variant="contained" className={classes.btnAddTask}>
-          Thêm công việc
+          Tìm công việc
         </Button>
       </Search>
     </div>

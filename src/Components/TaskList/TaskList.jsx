@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { useStyles } from "./style.js";
 
-import { Grid } from "@mui/material";
+import { Button, Divider, Grid } from "@mui/material";
 import Task from "../Task/Task.jsx";
 
 TaskList.propTypes = {};
@@ -47,7 +47,14 @@ function TaskList(props) {
   return (
     <>
       <div className={classes.taskList}>
-        <div className={classes.name}>Danh sách công việc</div>
+        <div className={classes.taskListTop}>
+          <div className={classes.name}>Danh sách công việc</div>
+          <Button variant="contained" className={classes.btnAddTask}>
+            Thêm công việc
+          </Button>
+        </div>
+
+        <Divider className={classes.divider} />
         <Grid container spacing={2} rowSpacing={3}>
           {listTask.map((task, index) => (
             <Grid key={index} item xs={3}>
