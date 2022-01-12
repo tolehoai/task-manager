@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
   Calendar,
@@ -20,6 +20,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { selectEvent } from "../../actions/event";
 
 const localizer = momentLocalizer(moment);
 
@@ -66,14 +68,26 @@ const height = 280 * myEventsList.length;
 Schedule.propTypes = {};
 
 function Schedule(props) {
+  const [currentEvent, setCurrentEvent] = useState([]);
+  const selectedEvent = useSelector((state) => state.event.selectEvent);
+  useEffect(() => {
+    setCurrentEvent(selectedEvent);
+  }, [selectedEvent]);
+  console.log("selected event change", currentEvent);
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+
   const handleSelectEvent = (event) => {
-    console.log(event);
+    const action = selectEvent(event);
+    dispatch(action);
+
     setOpen(true);
   };
+
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <>
       <div className="App">
@@ -118,7 +132,7 @@ function Schedule(props) {
         />
       </div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>{currentEvent.title}</DialogTitle>
         <DialogContent>
           <DialogContentText>
             To subscribe to this website, please enter your email address here.
