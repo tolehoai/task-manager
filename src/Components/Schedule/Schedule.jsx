@@ -27,139 +27,14 @@ import "./style.css";
 
 const localizer = momentLocalizer(moment);
 
-const myEventsList = [
-  {
-    id: 1,
-    start: new Date(),
-    end: new Date(),
-    title: "Test",
-    color: "#63b4ff",
-    userList: [
-      {
-        id: 1,
-        name: "Tô Lê Hoài",
-        avatarUrl:
-          "https://scontent.fsgn5-9.fna.fbcdn.net/v/t1.6435-9/119895915_1555866031245140_8317793854278817008_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=174925&_nc_ohc=XtOqaHkCyXYAX9kiaVc&tn=zMnoluBELVnk8512&_nc_ht=scontent.fsgn5-9.fna&oh=00_AT8z7AI6Gw-44UgiOJvgDNUvG1E2nkQQeR9G2pSEM3SjVw&oe=62061B54",
-      },
-    ],
-  },
-  {
-    id: 2,
-    start: new Date(2022, 0, 7),
-    end: new Date(2022, 0, 16),
-    title: "Kỹ thuật phát hiện tấn công mạng",
-    color: "#ff6363",
-    userList: [
-      {
-        id: 1,
-        name: "Tô Lê Hoài",
-        avatarUrl:
-          "https://scontent.fsgn5-9.fna.fbcdn.net/v/t1.6435-9/119895915_1555866031245140_8317793854278817008_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=174925&_nc_ohc=XtOqaHkCyXYAX9kiaVc&tn=zMnoluBELVnk8512&_nc_ht=scontent.fsgn5-9.fna&oh=00_AT8z7AI6Gw-44UgiOJvgDNUvG1E2nkQQeR9G2pSEM3SjVw&oe=62061B54",
-      },
-      {
-        id: 2,
-        name: "Võ Phước Toàn",
-        avatarUrl:
-          "https://scontent.fsgn5-11.fna.fbcdn.net/v/t1.6435-9/69923957_1235443576620722_1229261365722480640_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=730e14&_nc_ohc=2X7SUw-rdrQAX9Ia8Pl&_nc_ht=scontent.fsgn5-11.fna&oh=00_AT_BvfT-Qe734RbOQ7Yhkm3xDEjzdbMzbjRbEa7kE79bbg&oe=620692B3",
-      },
-      {
-        id: 3,
-        name: "Trần Trọng Nghĩa",
-        avatarUrl:
-          "https://www.harleytherapy.co.uk/counselling/wp-content/uploads/16297800391_5c6e812832.jpg",
-      },
-      {
-        id: 4,
-        name: "Nguyễn Văn A",
-        avatarUrl:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZWSAvhHmRxaGnNTEUNv8pHaJ261jjQMHg3ct3zSY3UMtVeWENM2X4L2BXWIx4nNkVY6g&usqp=CAU",
-      },
-    ],
-  },
-  {
-    id: 3,
-    start: new Date(2022, 0, 10),
-    end: new Date(2022, 0, 21),
-    title: "An ninh mạng",
-    color: "#1cce66",
-    userList: [
-      {
-        id: 1,
-        name: "Tô Lê Hoài",
-        avatarUrl:
-          "https://scontent.fsgn5-9.fna.fbcdn.net/v/t1.6435-9/119895915_1555866031245140_8317793854278817008_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=174925&_nc_ohc=XtOqaHkCyXYAX9kiaVc&tn=zMnoluBELVnk8512&_nc_ht=scontent.fsgn5-9.fna&oh=00_AT8z7AI6Gw-44UgiOJvgDNUvG1E2nkQQeR9G2pSEM3SjVw&oe=62061B54",
-      },
-      {
-        id: 2,
-        name: "Võ Phước Toàn",
-        avatarUrl:
-          "https://scontent.fsgn5-11.fna.fbcdn.net/v/t1.6435-9/69923957_1235443576620722_1229261365722480640_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=730e14&_nc_ohc=2X7SUw-rdrQAX9Ia8Pl&_nc_ht=scontent.fsgn5-11.fna&oh=00_AT_BvfT-Qe734RbOQ7Yhkm3xDEjzdbMzbjRbEa7kE79bbg&oe=620692B3",
-      },
-    ],
-  },
-  {
-    id: 4,
-    start: new Date(2022, 0, 10),
-    end: new Date(2022, 1, 11),
-    title: "An toàn hệ thống",
-    color: "#ffcb12",
-    userList: [
-      {
-        id: 1,
-        name: "Tô Lê Hoài",
-        avatarUrl:
-          "https://scontent.fsgn5-9.fna.fbcdn.net/v/t1.6435-9/119895915_1555866031245140_8317793854278817008_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=174925&_nc_ohc=XtOqaHkCyXYAX9kiaVc&tn=zMnoluBELVnk8512&_nc_ht=scontent.fsgn5-9.fna&oh=00_AT8z7AI6Gw-44UgiOJvgDNUvG1E2nkQQeR9G2pSEM3SjVw&oe=62061B54",
-      },
-      {
-        id: 2,
-        name: "Võ Phước Toàn",
-        avatarUrl:
-          "https://scontent.fsgn5-11.fna.fbcdn.net/v/t1.6435-9/69923957_1235443576620722_1229261365722480640_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=730e14&_nc_ohc=2X7SUw-rdrQAX9Ia8Pl&_nc_ht=scontent.fsgn5-11.fna&oh=00_AT_BvfT-Qe734RbOQ7Yhkm3xDEjzdbMzbjRbEa7kE79bbg&oe=620692B3",
-      },
-      {
-        id: 3,
-        name: "Trần Trọng Nghĩa",
-        avatarUrl:
-          "https://www.harleytherapy.co.uk/counselling/wp-content/uploads/16297800391_5c6e812832.jpg",
-      },
-    ],
-  },
-  {
-    id: 5,
-    start: new Date(2022, 0, 10),
-    end: new Date(2022, 0, 25),
-    title: "Niên luận ngành",
-    color: "#9e63ff",
-    userList: [
-      {
-        id: 1,
-        name: "Tô Lê Hoài",
-        avatarUrl:
-          "https://scontent.fsgn5-9.fna.fbcdn.net/v/t1.6435-9/119895915_1555866031245140_8317793854278817008_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=174925&_nc_ohc=XtOqaHkCyXYAX9kiaVc&tn=zMnoluBELVnk8512&_nc_ht=scontent.fsgn5-9.fna&oh=00_AT8z7AI6Gw-44UgiOJvgDNUvG1E2nkQQeR9G2pSEM3SjVw&oe=62061B54",
-      },
-      {
-        id: 2,
-        name: "Võ Phước Toàn",
-        avatarUrl:
-          "https://scontent.fsgn5-11.fna.fbcdn.net/v/t1.6435-9/69923957_1235443576620722_1229261365722480640_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=730e14&_nc_ohc=2X7SUw-rdrQAX9Ia8Pl&_nc_ht=scontent.fsgn5-11.fna&oh=00_AT_BvfT-Qe734RbOQ7Yhkm3xDEjzdbMzbjRbEa7kE79bbg&oe=620692B3",
-      },
-      {
-        id: 3,
-        name: "Trần Trọng Nghĩa",
-        avatarUrl:
-          "https://www.harleytherapy.co.uk/counselling/wp-content/uploads/16297800391_5c6e812832.jpg",
-      },
-    ],
-  },
-];
-
-const height = 280 * myEventsList.length;
-
 Schedule.propTypes = {};
 
 function Schedule(props) {
   const [currentEvent, setCurrentEvent] = useState([]);
   const selectedEvent = useSelector((state) => state.event.selectEvent);
+  const taskList = useSelector((state) => state.event.taskList);
+  const height = 280 * taskList.length;
+  console.log("TASK LIST: ", taskList);
   useEffect(() => {
     setCurrentEvent(selectedEvent);
   }, [selectedEvent]);
@@ -183,13 +58,13 @@ function Schedule(props) {
       <div className="App">
         <Calendar
           localizer={localizer}
-          events={myEventsList}
+          events={taskList}
           startAccessor="start"
           endAccessor="end"
           components={{
             event: UserGroupImage,
           }}
-          style={{ height: myEventsList.length * 350 }}
+          style={{ height: taskList.length * 350 }}
           step={55} // duration of the slot
           timeslots={10} // number of slots within an hour
           onSelectEvent={(event) => {

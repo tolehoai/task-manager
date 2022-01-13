@@ -12,6 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { alpha, styled } from "@mui/material/styles";
+import moment from "moment";
 import React from "react";
 import "./style.css";
 import { useStyles } from "./style.js";
@@ -61,7 +62,20 @@ const StyledMenu = styled((props) => (
 
 function Task(props) {
   const classes = useStyles();
-  const { taskName, level, deadline } = props.task;
+  const { title, level, end, color, status } = props.task;
+
+  let statusText = "";
+  if (status == 0) statusText = "Chưa thực hiện";
+  if (status == 1) statusText = "Đang thực hiện";
+  if (status == 2) statusText = "Đã thực hiện";
+  let deadline =
+    ("0" + end.getDate()).slice(-2) +
+    "/" +
+    ("0" + (end.getMonth() + 1)).slice(-2) +
+    "/" +
+    end.getFullYear();
+
+  console.log(deadline);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -76,29 +90,38 @@ function Task(props) {
     <>
       <Card
         sx={{ maxWidth: 345, minHeight: "100%" }}
-        className={`${classes.taskWrapper} card${level}`}
+        className={`${classes.taskWrapper} `}
+        style={{ borderTop: `5px solid ${color}` }}
       >
-        <CardHeader
-          action={
-            <IconButton
-              aria-label="settings"
-              id="demo-customized-button"
-              aria-controls={open ? "demo-customized-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              variant="contained"
-              disableElevation
-              onClick={handleClick}
-              endIcon={<KeyboardArrowDownIcon />}
-            >
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title={taskName}
-        />
+        <div>
+          <CardHeader
+            action={
+              <IconButton
+                aria-label="settings"
+                id="demo-customized-button"
+                aria-controls={open ? "demo-customized-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                variant="contained"
+                disableElevation
+                onClick={handleClick}
+                endIcon={<KeyboardArrowDownIcon />}
+              >
+                <MoreVertIcon />
+              </IconButton>
+            }
+            title={title}
+          />
+        </div>
+
         <div className={classes.cardBottom}>
-          <div className={`${classes.deadline} ${level}`}>
-            <AccessTimeIcon fontSize="small" /> {deadline}
+          <div className={classes.statusAndDate}>
+            <span>
+              <div className={`${classes.status} ${level}`}> {statusText}</div>
+            </span>
+            <div className={`${classes.deadline} ${level}`}>
+              <AccessTimeIcon fontSize="small" /> {deadline}
+            </div>
           </div>
 
           <AvatarGroup max={4} className={classes.avatarGroup}>

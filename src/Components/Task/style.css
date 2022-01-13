@@ -1,3 +1,21 @@
+span > .level0 {
+  background-color: transparent !important;
+  color: #ff6d00;
+  font-weight: 600;
+}
+
+span > .level1 {
+  background-color: transparent !important;
+  color: #00c853;
+  font-weight: 600;
+}
+
+span > .level2 {
+  background-color: transparent !important;
+  color: #c0ca33;
+  font-weight: 600;
+}
+
 .cardlevel0 {
   border-top: 5px solid #ff6d00 !important;
 }

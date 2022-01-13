@@ -15,9 +15,10 @@ const useStyles = makeStyles({
   deadline: {
     backgroundColor: "#00c853",
     color: "white",
+    fontSize: "14px",
     width: "110px",
     padding: "5px",
-    margin: "10px",
+    margin: "5px",
     borderRadius: "5px",
     display: "flex",
     alignItems: "center",
@@ -25,11 +26,19 @@ const useStyles = makeStyles({
   },
   avatarGroup: {
     display: "inline-block",
+    marginRight: "5px",
   },
   cardBottom: {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-around",
+  },
+  status: {
+    paddingLeft: "5px",
+  },
+  statusAndDate: {
+    display: "flex",
+    flexDirection: "column",
   },
 });
 export { useStyles };

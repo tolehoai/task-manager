@@ -5,6 +5,7 @@ import { useStyles } from "./style.js";
 
 import { Button, Divider, Grid } from "@mui/material";
 import Task from "../Task/Task.jsx";
+import { useSelector } from "react-redux";
 
 TaskList.propTypes = {};
 
@@ -43,7 +44,7 @@ const listTask = [
 
 function TaskList(props) {
   const classes = useStyles();
-
+  const taskList = useSelector((state) => state.event.taskList);
   return (
     <>
       <div className={classes.taskList}>
@@ -56,7 +57,7 @@ function TaskList(props) {
 
         <Divider className={classes.divider} />
         <Grid container spacing={2} rowSpacing={3}>
-          {listTask.map((task, index) => (
+          {taskList.map((task, index) => (
             <Grid item xs={3}>
               <Task key={index} task={task} />
             </Grid>
