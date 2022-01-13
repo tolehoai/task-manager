@@ -31,7 +31,7 @@ const useStyles = makeStyles({
   cardBottom: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
   },
   status: {
     paddingLeft: "5px",

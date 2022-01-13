@@ -22,8 +22,9 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEvent } from "../../actions/event";
-import UserGroupImage from "../UserGroupImage/UserGroupImage";
+
 import "./style.css";
+import UserGroupImageSchedule from "../UserGroupImageSchedule/UserGroupImage";
 
 const localizer = momentLocalizer(moment);
 
@@ -62,7 +63,7 @@ function Schedule(props) {
           startAccessor="start"
           endAccessor="end"
           components={{
-            event: UserGroupImage,
+            event: UserGroupImageSchedule,
           }}
           style={{ height: 300 * taskList.length }}
           step={55} // duration of the slot

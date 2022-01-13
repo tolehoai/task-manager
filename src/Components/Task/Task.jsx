@@ -15,6 +15,8 @@ import { alpha, styled } from "@mui/material/styles";
 import moment from "moment";
 import React from "react";
 import Schedule from "../Schedule/Schedule";
+import UserGroupImage from "../UserGroupImage/UserGroupImage";
+
 import "./style.css";
 import { useStyles } from "./style.js";
 
@@ -124,29 +126,7 @@ function Task(props) {
               <AccessTimeIcon fontSize="small" /> {deadline}
             </div>
           </div>
-
-          <AvatarGroup max={4} className={classes.avatarGroup}>
-            <Avatar
-              alt="Remy Sharp"
-              src="https://mui.com/static/images/avatar/1.jpg"
-              sx={{ width: 32, height: 32 }}
-            />
-            <Avatar
-              alt="Travis Howard"
-              src="https://mui.com//static/images/avatar/2.jpg"
-              sx={{ width: 32, height: 32 }}
-            />
-            <Avatar
-              alt="Cindy Baker"
-              src="https://mui.com//static/images/avatar/3.jpg"
-              sx={{ width: 32, height: 32 }}
-            />
-            <Avatar
-              alt="Agnes Walker"
-              src="/static/images/avatar/4.jpg"
-              sx={{ width: 32, height: 32 }}
-            />
-          </AvatarGroup>
+          <UserGroupImage event={props.task} />
         </div>
         <StyledMenu
           id="demo-customized-menu"

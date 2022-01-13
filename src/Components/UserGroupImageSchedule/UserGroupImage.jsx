@@ -6,7 +6,9 @@ import { useStyles } from "./style.js";
 import { Typography } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-function UserGroupImage(props) {
+UserGroupImageSchedule.propTypes = {};
+
+function UserGroupImageSchedule(props) {
   const classes = useStyles();
   // console.log("FROM UserGroup: ", props.event);
   return (
@@ -23,8 +25,9 @@ function UserGroupImage(props) {
       </AvatarGroup>
 
       <span className={classes.taskTitle}>{props.title}</span>
+      <ArrowForwardIosIcon />
     </div>
   );
 }
 
-export default UserGroupImage;
+export default UserGroupImageSchedule;
