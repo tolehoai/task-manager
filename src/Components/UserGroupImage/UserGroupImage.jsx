@@ -10,7 +10,7 @@ UserGroupImage.propTypes = {};
 
 function UserGroupImage(props) {
   const classes = useStyles();
-  console.log(props.event.userList);
+  console.log("FROM UserGroup: ", props.event);
   return (
     <div className={classes.userGroupImage}>
       <AvatarGroup max={4} className={classes.avatarGroup}>

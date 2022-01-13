@@ -33,7 +33,7 @@ function Schedule(props) {
   const [currentEvent, setCurrentEvent] = useState([]);
   const selectedEvent = useSelector((state) => state.event.selectEvent);
   const taskList = useSelector((state) => state.event.taskList);
-  const height = 280 * taskList.length;
+
   console.log("TASK LIST: ", taskList);
   useEffect(() => {
     setCurrentEvent(selectedEvent);
@@ -64,9 +64,10 @@ function Schedule(props) {
           components={{
             event: UserGroupImage,
           }}
-          style={{ height: taskList.length * 350 }}
+          style={{ height: 300 * taskList.length }}
           step={55} // duration of the slot
           timeslots={10} // number of slots within an hour
+          popup={false}
           onSelectEvent={(event) => {
             handleSelectEvent(event);
           }}

@@ -9,42 +9,10 @@ import { useSelector } from "react-redux";
 
 TaskList.propTypes = {};
 
-const listTask = [
-  {
-    taskName: "Kỹ thuật phát hiện tấn công mạng ",
-    level: "level0",
-    deadline: "15 tháng 1",
-  },
-  {
-    taskName: "An Ninh Mạng",
-    level: "level1",
-    deadline: "20 tháng 1",
-  },
-  {
-    taskName: "Niên luận cơ sở",
-    level: "level2",
-    deadline: "25 tháng 1",
-  },
-  {
-    taskName: "An toàn hệ thống",
-    level: "level0",
-    deadline: "10 tháng 2",
-  },
-  {
-    taskName: "Digital Marketing",
-    level: "level1",
-    deadline: "10 tháng 1",
-  },
-  {
-    taskName: "English",
-    level: "level2",
-    deadline: "18 tháng 1",
-  },
-];
-
 function TaskList(props) {
   const classes = useStyles();
   const taskList = useSelector((state) => state.event.taskList);
+
   return (
     <>
       <div className={classes.taskList}>

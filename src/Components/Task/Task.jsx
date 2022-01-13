@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { alpha, styled } from "@mui/material/styles";
 import moment from "moment";
 import React from "react";
+import Schedule from "../Schedule/Schedule";
 import "./style.css";
 import { useStyles } from "./style.js";
 

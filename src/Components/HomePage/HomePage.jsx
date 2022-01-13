@@ -5,6 +5,7 @@ import { useStyles } from "./style.js";
 import Search from "../SearchBox/SearchAppBar.jsx";
 import TaskList from "../TaskList/TaskList";
 import Schedule from "../Schedule/Schedule.jsx";
+import TestSchedule from "../TestSchedule/TestSchedule.jsx";
 
 Notification.propTypes = {};
 
@@ -17,6 +18,7 @@ function Notification(props) {
         <Search />
         <TaskList />
         <Schedule />
+        {/* <TestSchedule /> */}
       </div>
     </>
   );
