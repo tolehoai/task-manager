@@ -58,7 +58,7 @@ const initialState = {
       end: new Date(2022, 0, 21),
       title: "An ninh mạng",
       color: "#1cce66",
-      level: "level0",
+      level: "level2",
       status: 2,
       userList: [
         {
@@ -81,7 +81,7 @@ const initialState = {
       end: new Date(2022, 1, 11),
       title: "Tạo form AddTask bằng Formik và validation",
       color: "#ffcb12",
-      level: "level2",
+      level: "level1",
       status: 1,
       userList: [
         {
@@ -110,7 +110,7 @@ const initialState = {
       end: new Date(2022, 0, 25),
       title: "Niên luận ngành",
       color: "#9e63ff",
-      level: "level1",
+      level: "level0",
       status: 0,
       userList: [
         {
@@ -150,28 +150,12 @@ const initialState = {
         },
       ],
     },
+    
     {
       id: 8,
-      start: new Date(2022, 0, 10),
-      end: new Date(2022, 0, 25),
-      title: "Test",
-      color: "#63b4ff",
-      level: "level0",
-      status: 0,
-      userList: [
-        {
-          id: 1,
-          name: "Tô Lê Hoài",
-          avatarUrl:
-            "https://scontent.fsgn5-9.fna.fbcdn.net/v/t1.6435-9/119895915_1555866031245140_8317793854278817008_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=174925&_nc_ohc=XtOqaHkCyXYAX9kiaVc&tn=zMnoluBELVnk8512&_nc_ht=scontent.fsgn5-9.fna&oh=00_AT8z7AI6Gw-44UgiOJvgDNUvG1E2nkQQeR9G2pSEM3SjVw&oe=62061B54",
-        },
-      ],
-    },
-    {
-      id: 2,
-      start: new Date(2022, 0, 7),
-      end: new Date(2022, 0, 16),
-      title: "Đồng bộ data giữa TaskLisk và Schedule",
+      start: new Date(2022, 0, 12),
+      end: new Date(2022, 0, 30),
+      title: "An toàn hệ thống",
       color: "#ff6363",
       level: "level1",
       status: 1,
@@ -202,8 +186,12 @@ const initialState = {
         },
       ],
     },
+    
+    
   ],
-  selectEvent: [],
+  selectEvent: {
+   
+  },
 };
 
 const eventReducer = (state = initialState, action) => {

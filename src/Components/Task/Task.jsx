@@ -4,7 +4,23 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Avatar, AvatarGroup } from "@mui/material";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import DateTimePicker from "@mui/lab/DateTimePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import {
+  Avatar,
+  AvatarGroup,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControl,
+  Input,
+  InputLabel,
+  Select,
+  TextField,
+} from "@mui/material";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import Divider from "@mui/material/Divider";
@@ -13,7 +29,9 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { alpha, styled } from "@mui/material/styles";
 import moment from "moment";
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectEvent } from "../../actions/event";
 import Schedule from "../Schedule/Schedule";
 import UserGroupImage from "../UserGroupImage/UserGroupImage";
 
@@ -65,12 +83,15 @@ const StyledMenu = styled((props) => (
 
 function Task(props) {
   const classes = useStyles();
-  const { title, level, end, color, status } = props.task;
+  const dispatch = useDispatch();
+  const selectedEvent = useSelector((state) => state.event.selectEvent);
+  const { title, level, end, color, status, id } = props.task;
+  console.log(id);
 
   let statusText = "";
-  if (status == 0) statusText = "Chưa thực hiện";
-  if (status == 1) statusText = "Đang thực hiện";
-  if (status == 2) statusText = "Đã thực hiện";
+  if (status === 0) statusText = "Chưa thực hiện";
+  else if (status === 1) statusText = "Đang thực hiện";
+  else statusText = "Đã thực hiện";
   let deadline =
     ("0" + end.getDate()).slice(-2) +
     "/" +
@@ -82,11 +103,24 @@ function Task(props) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const [editFormOpen, setEditFormOpen] = useState(false);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+    setEditFormOpen(false);
+  };
+  const handleEditClick = (task) => {
+    console.log("dispatch select task with value: ", task);
+    const action = selectEvent(task);
+    dispatch(action);
+    setAnchorEl(null);
+    setEditFormOpen(true);
+  };
+
+  const handleEditFormClose = () => {
+    setEditFormOpen(false);
   };
 
   return (
@@ -137,7 +171,7 @@ function Task(props) {
           open={open}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose} disableRipple>
+          <MenuItem onClick={() => handleEditClick(props.task)} disableRipple>
             <EditIcon />
             Trĩnh xữa
           </MenuItem>
@@ -149,6 +183,63 @@ function Task(props) {
           </MenuItem>
         </StyledMenu>
       </Card>
+
+      {/* Modal */}
+
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <Dialog open={editFormOpen} onClose={handleEditFormClose}>
+          <DialogTitle>{selectedEvent.title}</DialogTitle>
+          <DialogContent>
+            <FormControl sx={{ m: 1, minWidth: "100%" }}>
+              <InputLabel htmlFor="component-simple">Tên công việc</InputLabel>
+              <Input
+                fullWidth
+                label="fullWidth"
+                id="component-simple"
+                value={selectedEvent.title}
+              />
+            </FormControl>
+            <div className={classes.date}>
+              <div>
+                <FormControl sx={{ m: 1, minWidth: 240 }}>
+                  <DateTimePicker
+                    label="Thời gian bắt đầu"
+                    value={selectedEvent.start}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </FormControl>
+              </div>
+              <div>
+                <FormControl sx={{ m: 1, minWidth: 240 }}>
+                  <DateTimePicker
+                    label="Thời gian kết thúc"
+                    value={selectedEvent.end}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </FormControl>
+              </div>
+            </div>
+
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Age</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={selectedEvent.status}
+                label="Age"
+              >
+                <MenuItem value={0}>Chưa thực hiện</MenuItem>
+                <MenuItem value={1}>Đang thực hiện</MenuItem>
+                <MenuItem value={2}>Đã thực hiện</MenuItem>
+              </Select>
+            </FormControl>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Hủy bỏ</Button>
+            <Button onClick={handleClose}>Chỉnh sửa</Button>
+          </DialogActions>
+        </Dialog>
+      </LocalizationProvider>
     </>
   );
 }
