@@ -86,7 +86,6 @@ function Task(props) {
   const dispatch = useDispatch();
   const selectedEvent = useSelector((state) => state.event.selectEvent);
   const { title, level, end, color, status, id } = props.task;
-  console.log(id);
 
   let statusText = "";
   if (status === 0) statusText = "Chưa thực hiện";
@@ -98,8 +97,6 @@ function Task(props) {
     ("0" + (end.getMonth() + 1)).slice(-2) +
     "/" +
     end.getFullYear();
-
-  console.log(deadline);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);

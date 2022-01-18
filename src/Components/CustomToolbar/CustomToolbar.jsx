@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectMonth, selectYear } from "../../actions/event";
 
 function CustomToolbar(props) {
+  //Lấy ra tháng hiện tại
+  //Tìm ngày có nhiều hoạt động nhất trong tháng hiện tại đó
+  //Set số lượng max lên state
+  //Ở Component Scheduler, lấy state max đó về rồi setHeight
+  const selectedMonth = useSelector((state) => state.event.selectMonth);
+  console.log("SELECT MONTH: ", selectedMonth);
   let {
     localizer: { messages },
     label,
     onNavigate,
     onView,
+    date,
   } = props;
+  const month = date.getMonth();
+  const year = date.getFullYear();
   console.log("props: ", props);
-
+  console.log("month: ", month);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const actionMonth = selectMonth(month);
+    const actionYear = selectYear(year);
+    dispatch(actionMonth);
+    dispatch(actionYear);
+  }, [date]);
   const goToBack = () => {
     onNavigate("PREV");
   };
@@ -52,7 +70,7 @@ function CustomToolbar(props) {
       </span>
 
       <span className="rbc-btn-group">
-        <button type="button" onClick={goToBack}>
+        <button type="button" onClick={goToNext}>
           Ngày sau
         </button>
       </span>

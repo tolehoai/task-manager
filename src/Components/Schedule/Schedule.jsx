@@ -37,8 +37,19 @@ function Schedule(props) {
   const [currentEvent, setCurrentEvent] = useState([]);
   const selectedEvent = useSelector((state) => state.event.selectEvent);
   const taskList = useSelector((state) => state.event.taskList);
+  const selectMonth = useSelector((state) => state.event.selectMonth);
+  const selectYear = useSelector((state) => state.event.selectYear);
 
-  console.log("TASK LIST: ", taskList);
+  console.log("scheduler re render");
+  const taskOfMonth = taskList.filter(
+    (task) =>
+      selectMonth >= task.start.getMonth() &&
+      selectMonth <= task.end.getMonth() &&
+      task.end.getFullYear() == selectYear
+  );
+
+  console.log("taskOfMonth: ", taskOfMonth);
+
   useEffect(() => {
     setCurrentEvent(selectedEvent);
   }, [selectedEvent]);
@@ -52,6 +63,18 @@ function Schedule(props) {
 
     setOpen(true);
   };
+
+  var numberInRow;
+  if (taskOfMonth.length === 0) {
+    numberInRow = 1;
+  } else {
+    numberInRow =
+      taskOfMonth.length <= 2 ? 2 : Math.ceil(taskOfMonth.length / 2) + 1;
+  }
+
+  const rowHeight = 350 * numberInRow;
+
+  console.log(numberInRow);
 
   const handleClose = () => {
     setOpen(false);
@@ -69,11 +92,12 @@ function Schedule(props) {
             event: UserGroupImageSchedule,
             toolbar: CustomToolbar,
           }}
-          // style={{ height: 250 * taskList.length }}
-          onNavigate={(event) => {
-            console.log(event);
+          // style={{
+          //   height: `${350 * numberInRow}px`,
+          // }}
+          style={{
+            height: rowHeight,
           }}
-          style={{ height: "600px" }}
           autoHeight={true}
           popup={true}
           onSelectEvent={(event) => {
@@ -87,7 +111,7 @@ function Schedule(props) {
               border: "none",
               padding: "5px",
               borderRadius: "15px",
-              margin: "5px 0px",
+              margin: "5px 2px",
             };
 
             if (event.isMine) {
@@ -110,6 +134,7 @@ function Schedule(props) {
           }}
         />
       </div>
+
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>{currentEvent.title}</DialogTitle>
