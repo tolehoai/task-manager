@@ -4,7 +4,58 @@ const initialState = {
       id: 1,
       start: new Date(2022, 0, 7),
       end: new Date(2022, 0, 7),
-      title: "Test",
+      title: "Tạo giao diện đăng nhập/đăng ký",
+      color: "#63b4ff",
+      level: "level0",
+      status: 0,
+      userList: [
+        {
+          id: 1,
+          name: "Tô Lê Hoài",
+          avatarUrl:
+            "https://scontent.fsgn5-9.fna.fbcdn.net/v/t1.6435-9/119895915_1555866031245140_8317793854278817008_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=174925&_nc_ohc=XtOqaHkCyXYAX9kiaVc&tn=zMnoluBELVnk8512&_nc_ht=scontent.fsgn5-9.fna&oh=00_AT8z7AI6Gw-44UgiOJvgDNUvG1E2nkQQeR9G2pSEM3SjVw&oe=62061B54",
+        },
+      ],
+    },
+    {
+      id: 2,
+      start: new Date(2022, 0, 7),
+      end: new Date(2022, 0, 7),
+      title: "Tạo giao diện trang chủ",
+      color: "#63b4ff",
+      level: "level0",
+      status: 0,
+      userList: [
+        {
+          id: 1,
+          name: "Tô Lê Hoài",
+          avatarUrl:
+            "https://scontent.fsgn5-9.fna.fbcdn.net/v/t1.6435-9/119895915_1555866031245140_8317793854278817008_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=174925&_nc_ohc=XtOqaHkCyXYAX9kiaVc&tn=zMnoluBELVnk8512&_nc_ht=scontent.fsgn5-9.fna&oh=00_AT8z7AI6Gw-44UgiOJvgDNUvG1E2nkQQeR9G2pSEM3SjVw&oe=62061B54",
+        },
+      ],
+    },
+    {
+      id: 3,
+      start: new Date(2022, 0, 7),
+      end: new Date(2022, 0, 7),
+      title: "Tạo các Router",
+      color: "#63b4ff",
+      level: "level0",
+      status: 0,
+      userList: [
+        {
+          id: 1,
+          name: "Tô Lê Hoài",
+          avatarUrl:
+            "https://scontent.fsgn5-9.fna.fbcdn.net/v/t1.6435-9/119895915_1555866031245140_8317793854278817008_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=174925&_nc_ohc=XtOqaHkCyXYAX9kiaVc&tn=zMnoluBELVnk8512&_nc_ht=scontent.fsgn5-9.fna&oh=00_AT8z7AI6Gw-44UgiOJvgDNUvG1E2nkQQeR9G2pSEM3SjVw&oe=62061B54",
+        },
+      ],
+    },
+    {
+      id: 4,
+      start: new Date(2022, 0, 7),
+      end: new Date(2022, 0, 7),
+      title: "Tạo giao diện trang chi tiết task",
       color: "#63b4ff",
       level: "level0",
       status: 0,
@@ -137,7 +188,7 @@ const initialState = {
       id: 6,
       start: new Date(2022, 0, 7),
       end: new Date(2022, 0, 7),
-      title: "Test",
+      title: "Tạo giao diện hệ thống",
       color: "#63b4ff",
       level: "level0",
       status: 0,

@@ -21,6 +21,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEvent } from "../../actions/event";
+import CustomToolbar from "../CustomToolbar/CustomToolbar";
 import UserGroupImageSchedule from "../UserGroupImageSchedule/UserGroupImage";
 import "./style.css";
 import { useStyles } from "./style.js";
@@ -66,8 +67,12 @@ function Schedule(props) {
           endAccessor="end"
           components={{
             event: UserGroupImageSchedule,
+            toolbar: CustomToolbar,
           }}
           // style={{ height: 250 * taskList.length }}
+          onNavigate={(event) => {
+            console.log(event);
+          }}
           style={{ height: "600px" }}
           autoHeight={true}
           popup={true}

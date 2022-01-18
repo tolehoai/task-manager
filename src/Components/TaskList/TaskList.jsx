@@ -26,8 +26,8 @@ function TaskList(props) {
         <Divider className={classes.divider} />
         <Grid container spacing={2} rowSpacing={3}>
           {taskList.map((task, index) => (
-            <Grid item xs={3}>
-              <Task key={index} task={task} />
+            <Grid key={index} item xs={3}>
+              <Task task={task} />
             </Grid>
           ))}
         </Grid>
