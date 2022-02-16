@@ -1,14 +1,44 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectMonth, selectYear } from "../../actions/event";
+import {
+  changeMonth,
+  changeView,
+  selectMonth,
+  selectYear,
+} from "../../actions/event";
 
 function CustomToolbar(props) {
+  console.log("custom toolbar re-render");
   //Lấy ra tháng hiện tại
   //Tìm ngày có nhiều hoạt động nhất trong tháng hiện tại đó
   //Set số lượng max lên state
   //Ở Component Scheduler, lấy state max đó về rồi setHeight
+
+  //////////////////////////////////////////////////////////
+  const selectMonthRedux = useSelector((state) => state.event.selectMonth);
+  const selectYearRedux = useSelector((state) => state.event.selectYear);
+  const taskList = useSelector((state) => state.event.taskList);
+  const currentView = useSelector((state) => state.event.currentView);
+  console.log(taskList);
+  const taskOfMonth = taskList.filter(
+    (task) =>
+      selectMonthRedux >= task.start.getMonth() &&
+      selectMonthRedux <= task.end.getMonth() &&
+      task.end.getFullYear() == selectYearRedux
+  );
+
+  const numberInRow = useRef(1);
+  if (taskOfMonth.length === 0) {
+    numberInRow.current = 1;
+  } else {
+    numberInRow.current =
+      taskOfMonth.length <= 2 ? 2 : Math.ceil(taskOfMonth.length / 2) + 1;
+  }
+  console.log(taskOfMonth);
+  /////////////////////////////////////////////////////////
+
   const selectedMonth = useSelector((state) => state.event.selectMonth);
-  console.log("SELECT MONTH: ", selectedMonth);
+
   let {
     localizer: { messages },
     label,
@@ -16,43 +46,81 @@ function CustomToolbar(props) {
     onView,
     date,
   } = props;
-  const month = date.getMonth();
-  const year = date.getFullYear();
-  console.log("props: ", props);
-  console.log("month: ", month);
+
   const dispatch = useDispatch();
   useEffect(() => {
-    const actionMonth = selectMonth(month);
-    const actionYear = selectYear(year);
-    dispatch(actionMonth);
-    dispatch(actionYear);
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const data = {
+      slMonth: month,
+      slYear: year,
+      number: numberInRow.current,
+    };
+    const actionChangeMonth = changeMonth(data);
+    dispatch(actionChangeMonth);
+    // const actionMonth = selectMonth(month);
+    // const actionYear = selectYear(year);
+    // dispatch(actionMonth);
+    // dispatch(actionYear);
   }, [date]);
   const goToBack = () => {
     onNavigate("PREV");
+    if (currentView == "month") {
+      const actionChangeView = changeView("week");
+      dispatch(actionChangeView);
+      setTimeout(() => {
+        const actionChangeView1 = changeView("month");
+        dispatch(actionChangeView1);
+      }, 0);
+    }
   };
 
   const goToNext = () => {
     onNavigate("NEXT");
+    if (currentView == "month") {
+      const actionChangeView = changeView("week");
+      dispatch(actionChangeView);
+      setTimeout(() => {
+        const actionChangeView1 = changeView("month");
+        dispatch(actionChangeView1);
+      }, 0);
+    }
   };
 
   const goToCurrent = () => {
     onNavigate("TODAY");
+    if (currentView == "month") {
+      const actionChangeView = changeView("week");
+      dispatch(actionChangeView);
+      setTimeout(() => {
+        const actionChangeView1 = changeView("month");
+        dispatch(actionChangeView1);
+      }, 0);
+    }
   };
 
   const viewMonth = () => {
-    onView("month");
+    // onView("month");
+    const actionChangeView = changeView("month");
+    dispatch(actionChangeView);
   };
 
   const viewWeek = () => {
-    onView("week");
+    // onView("week");
+    const actionChangeView = changeView("week");
+    dispatch(actionChangeView);
   };
 
   const viewDay = () => {
-    onView("day");
+    // onView("day");
+    const actionChangeView = changeView("day");
+    dispatch(actionChangeView);
   };
 
   const viewAgenda = () => {
-    onView("agenda");
+    // onView("agenda");
+    const actionChangeView = changeView("agenda");
+    dispatch(actionChangeView);
   };
 
   return (

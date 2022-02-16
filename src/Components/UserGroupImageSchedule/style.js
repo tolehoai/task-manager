@@ -5,6 +5,7 @@ const useStyles = makeStyles({
     display: "flex !important",
     alignItems: "center !important",
     justifyContent: "space-between",
+   
   },
   avatarGroup: {
     display: "inline-block",

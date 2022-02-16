@@ -10,7 +10,7 @@ UserGroupImageSchedule.propTypes = {};
 
 function UserGroupImageSchedule(props) {
   const classes = useStyles();
-  // console.log("FROM UserGroup: ", props.event);
+
   return (
     <div className={classes.userGroupImage}>
       <AvatarGroup max={4} className={classes.avatarGroup}>
@@ -19,7 +19,7 @@ function UserGroupImageSchedule(props) {
             key={index}
             alt={user.name}
             src={user.avatarUrl}
-            sx={{ width: 25, height: 25 }}
+            sx={{ width: 22, height: 22 }}
           />
         ))}
       </AvatarGroup>

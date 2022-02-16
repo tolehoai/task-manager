@@ -1,10 +1,7 @@
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DateTimePicker from "@mui/lab/DateTimePicker";
-import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import MobileDatePicker from "@mui/lab/MobileDatePicker";
-import TimePicker from "@mui/lab/TimePicker";
-import { FormControl, FormHelperText, MenuItem, Select } from "@mui/material";
+import { FormControl, MenuItem, Select } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -12,15 +9,14 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
-import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import moment from "moment";
 import "moment/locale/vi";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useDispatch, useSelector } from "react-redux";
-import { selectEvent } from "../../actions/event";
+import { changeHeight, changeView, selectEvent } from "../../actions/event";
 import CustomToolbar from "../CustomToolbar/CustomToolbar";
 import UserGroupImageSchedule from "../UserGroupImageSchedule/UserGroupImage";
 import "./style.css";
@@ -35,12 +31,18 @@ Schedule.propTypes = {};
 function Schedule(props) {
   const classes = useStyles();
   const [currentEvent, setCurrentEvent] = useState([]);
+  const [rowHeight, setRowHeight] = useState(350);
   const selectedEvent = useSelector((state) => state.event.selectEvent);
   const taskList = useSelector((state) => state.event.taskList);
   const selectMonth = useSelector((state) => state.event.selectMonth);
   const selectYear = useSelector((state) => state.event.selectYear);
 
+  const [chieucao, setChieucao] = useState(600);
+
+  const { height } = props;
+
   console.log("scheduler re render");
+
   const taskOfMonth = taskList.filter(
     (task) =>
       selectMonth >= task.start.getMonth() &&
@@ -48,14 +50,15 @@ function Schedule(props) {
       task.end.getFullYear() == selectYear
   );
 
-  console.log("taskOfMonth: ", taskOfMonth);
+  const numberInRow = useRef(1);
+  if (taskOfMonth.length === 0) {
+    numberInRow.current = 1;
+  } else {
+    numberInRow.current =
+      taskOfMonth.length <= 2 ? 2 : Math.ceil(taskOfMonth.length / 2) + 1;
+  }
 
-  useEffect(() => {
-    setCurrentEvent(selectedEvent);
-  }, [selectedEvent]);
-
-  const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
+  console.log("rowHeight: ", 350 * numberInRow.current);
 
   const handleSelectEvent = (event) => {
     const action = selectEvent(event);
@@ -64,40 +67,72 @@ function Schedule(props) {
     setOpen(true);
   };
 
-  var numberInRow;
-  if (taskOfMonth.length === 0) {
-    numberInRow = 1;
-  } else {
-    numberInRow =
-      taskOfMonth.length <= 2 ? 2 : Math.ceil(taskOfMonth.length / 2) + 1;
-  }
-
-  const rowHeight = 350 * numberInRow;
-
-  console.log(numberInRow);
-
   const handleClose = () => {
     setOpen(false);
   };
 
+  useEffect(() => {
+    setCurrentEvent(selectedEvent);
+  }, [selectedEvent]);
+
+  // useEffect(() => {
+  //   const actionHeightOfRow = changeHeight(numberInRow.current * 350);
+  //   dispatch(actionHeightOfRow);
+  // }, [selectMonth]);
+
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+
+  const heightRedux = useSelector((state) => state.event.heightOfRow);
+  const dropzoneStyle = {
+    // width: `200px`,
+    // height: `200px`,
+    height: `${350 * numberInRow.current}px`,
+  };
+
+  const currentView = useSelector((state) => state.event.currentView);
+
+  const [chieudai, setChieuDai] = useState(600);
+
+  const handleChangeSize = () => {
+    setChieuDai(5000);
+  };
+  if (currentView == "month") {
+    const actionChangeView = changeView("month");
+    dispatch(actionChangeView);
+    setTimeout(() => {
+      const actionChangeView1 = changeView("month");
+      dispatch(actionChangeView1);
+    }, 0);
+  }
   return (
     <>
-      <div className="App">
+      <button onClick={handleChangeSize}>Change Size</button>
+      <div className="Scheduler">
         <Calendar
           localizer={localizer}
           events={taskList}
+          defaultView={currentView}
+          view={currentView}
           startAccessor="start"
           endAccessor="end"
+          style={{
+            // height: 300 * numberInRow.current,
+            height: 1200,
+          }}
+          // style={dropzoneStyle}
+          // style={{
+          //   height: heightRedux,
+          // }}
           components={{
             event: UserGroupImageSchedule,
             toolbar: CustomToolbar,
           }}
+          // className={classes.hoai}
           // style={{
-          //   height: `${350 * numberInRow}px`,
+          //   height: `${350 * numberInRow.current}px`,
           // }}
-          style={{
-            height: rowHeight,
-          }}
+
           autoHeight={true}
           popup={true}
           onSelectEvent={(event) => {
@@ -107,9 +142,8 @@ function Schedule(props) {
             let newStyle = {
               backgroundColor: event.color,
               color: "white",
-              borderRadius: "0px",
               border: "none",
-              padding: "5px",
+              padding: "3px",
               borderRadius: "15px",
               margin: "5px 2px",
             };

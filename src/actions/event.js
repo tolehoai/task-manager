@@ -18,3 +18,24 @@ export const selectYear = (slYear) => {
     payload: slYear,
   };
 };
+
+export const changeHeight = (height) => {
+  return {
+    type: "CHANGE_HEIGHT",
+    payload: height,
+  };
+};
+
+export const changeMonth = (data) => {
+  return {
+    type: "CHANGE_MONTH",
+    payload: data,
+  };
+};
+
+export const changeView = (data) => {
+  return {
+    type: "CHANGE_VIEW",
+    payload: data,
+  };
+};

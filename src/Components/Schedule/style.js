@@ -1,8 +1,8 @@
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
-  date: {
-   display:"flex",
+  hoai: {
+  //  backgroundColor:"red"
   },
 });
 export { useStyles };
